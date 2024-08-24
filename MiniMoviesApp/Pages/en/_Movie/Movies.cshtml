@@ -3,3 +3,35 @@
 @{
     ViewData["Title"] = "Movies";
 }
+
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Rate</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model._movies)
+        {
+            <tr>
+                <th scope="row">@movie.Id</th>
+                <td>@movie.Title</td>
+                <td>@movie.Rate/10</td>
+                <td><a href="/Movie/@movie.Title" class="btn btn-secondary">Show Details</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-page="/en/_Movie/AddMovie" class="btn btn-success">Add New</a>
+</div>
+
+
