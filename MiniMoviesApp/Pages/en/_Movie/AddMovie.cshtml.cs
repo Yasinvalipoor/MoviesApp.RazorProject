@@ -1,26 +1,41 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MiniMoviesApp.Data.Db;
 using MiniMoviesApp.Data.Models;
+using MiniMoviesApp.Services;
 
-namespace MiniMoviesApp.Pages.en._Movie
+namespace MiniMoviesApp.Pages.en._Movie;
+
+public class AddMovieModel : PageModel
 {
-    public class AddMovieModel : PageModel
+    private readonly IServiceMovie _service;
+
+    public AddMovieModel(IServiceMovie service)
     {
-        [BindProperty]
-        public Movie Movie { get; set; }
+        _service = service;
+    }
 
-        public void OnGet()
-        {
-        }
+    [BindProperty]
+    public Movie Movie { get; set; }
 
-        public IActionResult OnPost()
+    public void OnGet()
+    {
+    }
+
+    public IActionResult OnPost()
+    {
+        if (ModelState.IsValid is false)
         {
-            var value = $"{Movie.Title}-{Movie.Rate}-{Movie.Description}";
-            if (ModelState.IsValid is false)
-            {
-                return Page();
-            }
-            return Redirect("Movies");
+            return Page();
         }
+        var movie = new Movie()
+        {
+            Title = Movie.Title,
+            Description = Movie.Description,
+            Rate = Movie.Rate,
+
+        };
+        _service.AddMovie(movie);
+        return Redirect("Movies");  
     }
 }

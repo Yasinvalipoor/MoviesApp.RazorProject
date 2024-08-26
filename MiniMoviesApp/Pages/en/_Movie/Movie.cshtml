@@ -1,0 +1,20 @@
+﻿@page "/en/Movie/{title:alpha}"
+@model MiniMoviesApp.Pages.en._Movie.MovieModel
+@{
+    ViewData["Title"] = "Movie details";
+}
+
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+<div class="card">
+    <div class="card-header">
+        Movie - @Model.movie?.Id
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">@Model.movie?.Title</h5>
+        <p class="card-text">Rate: @Model.movie?.Rate</p>
+        <p class="card-text">Description: @Model.movie?.Description</p>
+        <a asp-page="/en/_Movie/Movies" class="btn btn-primary">Show all</a>
+    </div>
+</div>

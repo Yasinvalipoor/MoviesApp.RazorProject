@@ -18,13 +18,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var movie in Model._movies)
+        @foreach (var movie in Model.movie)
         {
             <tr>
                 <th scope="row">@movie.Id</th>
                 <td>@movie.Title</td>
                 <td>@movie.Rate/10</td>
-                <td><a href="/Movie/@movie.Title" class="btn btn-secondary">Show Details</a></td>
+                <td><a href="/en/Movie/@movie.Title" class="btn btn-secondary">Show Details</a></td>
             </tr>
         }
     </tbody>

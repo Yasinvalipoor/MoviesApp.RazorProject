@@ -1,7 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using MiniMoviesApp.Data.Db;
+using MiniMoviesApp.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<MovieContext>(option =>
+{
+    option.UseInMemoryDatabase("Movie");
+});
+
+builder.Services.AddScoped<IServiceMovie, MovieService>();
 
 var app = builder.Build();
 
