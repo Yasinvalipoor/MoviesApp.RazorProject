@@ -1,11 +1,15 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MiniMoviesApp.Data.Db;
 using MiniMoviesApp.Data.Models;
 using MiniMoviesApp.Services;
 
 namespace MiniMoviesApp.Pages.en._Movie;
 
+//[Authorize(Roles = "Admin")]
+//[Authorize(Roles = "Manager")]
+
+[Authorize(Policy = "GraduatedOnly")]
 public class AddMovieModel : PageModel
 {
     private readonly IServiceMovie _service;
@@ -36,6 +40,6 @@ public class AddMovieModel : PageModel
 
         };
         _service.AddMovie(movie);
-        return Redirect("Movies");  
+        return Redirect("Movies");
     }
 }
